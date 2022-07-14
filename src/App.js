@@ -59,7 +59,7 @@ const MovieListContainer = styled.div`
   flex-wrap: wrap;
   padding: 30px;
   gap: 25px;
-  justify-content: space-evenly;;
+  justify-content: space-evenly; ;
 `;
 const Placeholder = styled.img`
   width: 120px;
@@ -78,13 +78,13 @@ function App() {
 
   const fetchData = async (searchString) => {
     const response = await Axios.get(
-      `https://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY}`,
+      `https://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY}`
     );
     updateMovieList(response.data.Search);
   };
 
   const onTextChange = (e) => {
-    onMovieSelect("")
+    onMovieSelect("");
     clearTimeout(timeoutId);
     updateSearchQuery(e.target.value);
     const timeout = setTimeout(() => fetchData(e.target.value), 500);
@@ -106,7 +106,12 @@ function App() {
           />
         </SearchBox>
       </Header>
-      {selectedMovie && <MovieInfoComponent selectedMovie={selectedMovie} onMovieSelect={onMovieSelect}/>}
+      {selectedMovie && (
+        <MovieInfoComponent
+          selectedMovie={selectedMovie}
+          onMovieSelect={onMovieSelect}
+        />
+      )}
       <MovieListContainer>
         {movieList?.length ? (
           movieList.map((movie, index) => (
